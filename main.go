@@ -20,7 +20,6 @@ type WeatherJson struct {
 	WeatherCode int         `json:"weather_code"`
 	Temp        json.Number `json:"temperature_2m"`
 	FeelsTemp   json.Number `json:"apparent_temperature"`
-	PrecipProb  json.Number ``
 	// Precip Prob must be inherited from time 0 in hourly data
 	PrecipAmmount json.Number `json:"precipitation"`
 	Humidity      json.Number `json:"relative_humidity_2m"`
@@ -48,7 +47,7 @@ type DailyJson struct {
 	Sunrise       []string      `json:"sunrise"`
 	Sunset        []string      `json:"sunset"`
 	Moonrise      []string      `json:"moonrise"`
-	Moonset       []string      `json"moonset"`
+	Moonset       []string      `json:"moonset"`
 }
 
 type Response struct {
@@ -61,14 +60,14 @@ type Response struct {
 }
 
 func urlFormat() string {
-	// TODO: Currently a plceholder, implement actual string builder logic with basic tui
+	// TODO: Currently a placeholder, implement actual string builder logic with basic tui
 
 	const timezone string = "America/New_York"
-	const lat float32 = 52.52
-	const long float32 = 13.41
-	const tempUnit = "celsius" // celsius or fahrenheit&
-	const precipUnit = "mm"    // mm or inch
-	const speedUnit = "kmh"    // kmh mph ms(meters/sec) kn (knots)
+	const lat float32 = 42.3584
+	const long float32 = -71.0598
+	const tempUnit string = "celsius" // celsius or fahrenheit&
+	const precipUnit string = "mm"    // mm or inch
+	const speedUnit string = "kmh"    // kmh mph ms(meters/sec) kn (knots)
 	const currentSelect string = "weather_code,temperature_2m,apparent_temperature,precipitation,relative_humidity_2m"
 	const hourlySelect string = "temperature_2m,precipitation_probability,precipitation,apparent_temperature,relative_humidity_2m,weather_code"
 	const dailySelect string = "weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_sum,precipitation_hours,precipitation_probability_max,sunrise,sunset,moonset,moonrise"
