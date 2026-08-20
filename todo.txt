@@ -1,0 +1,14 @@
+(C) Package and build with nix
+(A) refamaliarize with go, shake off the rust
+(A) 2026-08-19 Start with +api, make modular from the start where calls are constructed based on syntax from docs
+(C) To famaliarize self with charm, make a very very basic TUI selection to craft these api calls and display rough data
+x 2026-08-19 2026-08-19 date
+2026-08-19 inital tui should be basic and have descriptions of all the options
+2026-08-19 After inital tui made, look into managing settings within the tui. How would stuff be persistant? manigable via nix?
+2026-08-19 Create a color pallete for the TUI, or have it inherit user theme (since some may not have a theme, implement default)
+2026-08-19 test settings would just be defaults
+(B) once api functions work, make very simple command line tool; proper frontend and backend so i can just route it to the eventual charm frontend
+2026-08-19 make sure its highly customizable
+2026-08-19 figure out how padding strings works for temp formating
+2026-08-19 for temp; alwaus show 2 digits, and a smaller decimal off to the side in secondary color. unsure how to handle tripple digit temp
+2026-08-19 @stretch fun thing for future; background rain particles.
