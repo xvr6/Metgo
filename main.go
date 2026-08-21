@@ -60,7 +60,8 @@ type Response struct {
 }
 
 func urlFormat() string {
-	// TODO: Currently a placeholder, implement actual string builder logic with basic tui
+	// TODO: Currently a placeholder, implement actual string builder logic with basic tui.
+	// Regardless, likely have these be the default that are always enabled, and any settings would be atop of these.
 
 	const timezone string = "America/New_York"
 	const lat float32 = 42.3584
@@ -74,6 +75,30 @@ func urlFormat() string {
 
 	output := fmt.Sprintf("https://api.open-meteo.com/v1/forecast?timezone=%v&latitude=%v&longitude=%v&temperature_unit=%v&precipitation_unit=%v&wind_speed_unit=%v&current=%v&hourly=%v&daily=%v", timezone, lat, long, tempUnit, precipUnit, speedUnit, currentSelect, hourlySelect, dailySelect)
 	return output
+}
+
+// - placeholder break---
+// Just the above data formatted into a more logical structure for the frontend to parse through.
+
+// One single instance of weather data. Used for current weather and hourly weather breakdowns
+type WeatherData struct {
+}
+
+// Other information that only makes sense to view on a 'day scale', as well as the hourly reports and averages.
+type ParsedDay struct {
+}
+
+type ParsedCurrent struct {
+}
+
+// The actual datastructure to be sent to the frontend, includes other infrmation about session and specific location
+type ParsedData struct {
+}
+
+func reformat() ParsedData {
+	var formatted ParsedCurrent
+
+	return ParsedData(formatted)
 }
 
 func main() {
@@ -105,4 +130,7 @@ func main() {
 		  daily weathers
 		  units (likely not needed but is good for sanity)
 	} */
+	data := reformat()
+	fmt.Printf("Struct:\n%#v", data)
+
 }
