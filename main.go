@@ -59,24 +59,6 @@ type Response struct {
 	Daily     DailyJson   `json:"daily"`
 }
 
-func urlFormat() string {
-	// TODO: Currently a placeholder, implement actual string builder logic with basic tui.
-	// Regardless, likely have these be the default that are always enabled, and any settings would be atop of these.
-
-	const timezone string = "America/New_York"
-	const lat float32 = 42.3584
-	const long float32 = -71.0598
-	const tempUnit string = "celsius" // celsius or fahrenheit&
-	const precipUnit string = "mm"    // mm or inch
-	const speedUnit string = "kmh"    // kmh mph ms(meters/sec) kn (knots)
-	const currentSelect string = "weather_code,temperature_2m,apparent_temperature,precipitation,relative_humidity_2m"
-	const hourlySelect string = "temperature_2m,precipitation_probability,precipitation,apparent_temperature,relative_humidity_2m,weather_code"
-	const dailySelect string = "weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_sum,precipitation_hours,precipitation_probability_max,sunrise,sunset,moonset,moonrise"
-
-	output := fmt.Sprintf("https://api.open-meteo.com/v1/forecast?timezone=%v&latitude=%v&longitude=%v&temperature_unit=%v&precipitation_unit=%v&wind_speed_unit=%v&current=%v&hourly=%v&daily=%v", timezone, lat, long, tempUnit, precipUnit, speedUnit, currentSelect, hourlySelect, dailySelect)
-	return output
-}
-
 // - placeholder break---
 // Just the above data formatted into a more logical structure for the frontend to parse through.
 
@@ -99,6 +81,24 @@ func reformat() ParsedData {
 	var formatted ParsedCurrent
 
 	return ParsedData(formatted)
+}
+
+func urlFormat() string {
+	// TODO: Currently a placeholder, implement actual string builder logic with basic tui.
+	// Regardless, likely have these be the default that are always enabled, and any settings would be atop of these.
+
+	const timezone string = "America/New_York"
+	const lat float32 = 42.3584
+	const long float32 = -71.0598
+	const tempUnit string = "celsius" // celsius or fahrenheit&
+	const precipUnit string = "mm"    // mm or inch
+	const speedUnit string = "kmh"    // kmh mph ms(meters/sec) kn (knots)
+	const currentSelect string = "weather_code,temperature_2m,apparent_temperature,precipitation,relative_humidity_2m"
+	const hourlySelect string = "temperature_2m,precipitation_probability,precipitation,apparent_temperature,relative_humidity_2m,weather_code"
+	const dailySelect string = "weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_sum,precipitation_hours,precipitation_probability_max,sunrise,sunset,moonset,moonrise"
+
+	output := fmt.Sprintf("https://api.open-meteo.com/v1/forecast?timezone=%v&latitude=%v&longitude=%v&temperature_unit=%v&precipitation_unit=%v&wind_speed_unit=%v&current=%v&hourly=%v&daily=%v", timezone, lat, long, tempUnit, precipUnit, speedUnit, currentSelect, hourlySelect, dailySelect)
+	return output
 }
 
 func main() {
