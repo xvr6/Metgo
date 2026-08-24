@@ -15,6 +15,7 @@ type Units struct {
 	PrecipAmmount string `json:"precipitation"`
 	Humidity      string `json:"relative_humidity_2m"`
 }
+
 type WeatherJson struct {
 	Time          string      `json:"time"`
 	WeatherCode   int         `json:"weather_code"`
@@ -24,9 +25,6 @@ type WeatherJson struct {
 	Humidity      json.Number `json:"relative_humidity_2m"`
 	// Precip Prob must be inherited from time 0 in hourly data
 }
-
-// TODO: The hourly data is listed as "time": [xxxx-xx-xxTxx:xx], "temperature_2m": [<list of corelated temps>], etc
-// These should be mapped together on creation of HourlyJson for the sake of less formatting in the future. Once response is properly turned into structs, then do formatting there.
 
 type HourlyJson struct {
 	Time          []string      `json:"time"`
@@ -59,20 +57,43 @@ type Response struct {
 	Daily     DailyJson   `json:"daily"`
 }
 
-// - placeholder break---
+// - Reformat of data for passing to frontend ---
 // Just the above data formatted into a more logical structure for the frontend to parse through.
 
-// One single instance of weather data. Used for current weather and hourly weather breakdowns
-type WeatherData struct {
+// An instance of weather data. Used for current weather and hourly weather breakdowns. Helps keep data predictible if the same structure is used EVERYWHERE.
+type WeatherInstance struct {
+	Time          string
+	WeatherCode   int
+	Temp          int
+	FeelsTemp     int
+	PrecipAmmount int
+	Humidity      int
+}
+
+type ParsedHour struct {
 }
 
 // Other information that only makes sense to view on a 'day scale', as well as the hourly reports and averages.
 type ParsedDay struct {
+	Hourly   [24]ParsedHour
+	TempMax  string
+	TempMin  string
+	Sunrise  string
+	Sunset   string
+	Moonrise string
+	Moonset  string
 }
+
+// instead of storing timestamps as a 'string', could i do it with some sort of existing timestamp type or otherwise make my own?
 
 // The actual datastructure to be sent to the frontend, includes other infrmation about session and specific location
 type ParsedData struct {
-	// should contain c
+	Lat            float32
+	Long           float32
+	Timezone       string //maybe move to units; effectively acts like one
+	CurrentWeather WeatherInstance
+	Units          Units
+	Day            [7]ParsedDay
 }
 
 func reformat() ParsedData {
@@ -88,7 +109,7 @@ func urlFormat() string {
 	const timezone string = "America/New_York"
 	const lat float32 = 42.3584
 	const long float32 = -71.0598
-	const tempUnit string = "celsius" // celsius or fahrenheit&
+	const tempUnit string = "celsius" // celsius or fahrenheit
 	const precipUnit string = "mm"    // mm or inch
 	const speedUnit string = "kmh"    // kmh mph ms(meters/sec) kn (knots)
 	const currentSelect string = "weather_code,temperature_2m,apparent_temperature,precipitation,relative_humidity_2m"
