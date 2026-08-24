@@ -16,13 +16,13 @@ type Units struct {
 	Humidity      string `json:"relative_humidity_2m"`
 }
 type WeatherJson struct {
-	Time        string      `json:"time"`
-	WeatherCode int         `json:"weather_code"`
-	Temp        json.Number `json:"temperature_2m"`
-	FeelsTemp   json.Number `json:"apparent_temperature"`
-	// Precip Prob must be inherited from time 0 in hourly data
+	Time          string      `json:"time"`
+	WeatherCode   int         `json:"weather_code"`
+	Temp          json.Number `json:"temperature_2m"`
+	FeelsTemp     json.Number `json:"apparent_temperature"`
 	PrecipAmmount json.Number `json:"precipitation"`
 	Humidity      json.Number `json:"relative_humidity_2m"`
+	// Precip Prob must be inherited from time 0 in hourly data
 }
 
 // TODO: The hourly data is listed as "time": [xxxx-xx-xxTxx:xx], "temperature_2m": [<list of corelated temps>], etc
@@ -70,17 +70,15 @@ type WeatherData struct {
 type ParsedDay struct {
 }
 
-type ParsedCurrent struct {
-}
-
 // The actual datastructure to be sent to the frontend, includes other infrmation about session and specific location
 type ParsedData struct {
+	// should contain c
 }
 
 func reformat() ParsedData {
-	var formatted ParsedCurrent
+	var formatted ParsedData
 
-	return ParsedData(formatted)
+	return formatted
 }
 
 func urlFormat() string {
