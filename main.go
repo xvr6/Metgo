@@ -96,7 +96,7 @@ type ParsedData struct {
 	Day            [7]ParsedDay
 }
 
-func reformat() ParsedData {
+func reformat(res Response) ParsedData {
 	var formatted ParsedData
 
 	return formatted
@@ -130,17 +130,17 @@ func main() {
 		log.Fatal(err)
 	}
 
-	responseParsed, err := io.ReadAll(responseRaw.Body)
+	response, err := io.ReadAll(responseRaw.Body)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	var responseObject Response
-	if err := json.Unmarshal(responseParsed, &responseObject); err != nil {
+	var res Response
+	if err := json.Unmarshal(response, &res); err != nil {
 		log.Fatal(err)
 	}
 	// debug printout
-	debug, _ := json.MarshalIndent(responseObject, "", "  ")
+	debug, _ := json.MarshalIndent(res, "", "  ")
 	fmt.Println(string(debug))
 
 	/* TODO: mass reformatting of data to fit something more useable for an actual app.
@@ -149,7 +149,7 @@ func main() {
 		  daily weathers
 		  units (likely not needed but is good for sanity)
 	} */
-	data := reformat()
+	data := reformat(res)
 	fmt.Printf("Struct:\n%#v", data)
 
 }
