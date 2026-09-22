@@ -14,3 +14,4 @@ x 2026-08-19 2026-08-19 date
 2026-08-19 @stretch fun thing for future; background rain particles.
 (D) ability to search for coords of locations and some sort of way to save them
 2026-08-20 graphs for all hourly data overlaid atop eachother, allowing quick comparison to other days (at least for ones that i have data for)
+2026-09-22 map view to more accuerately select coords of locations since the api does allow very granular selection
